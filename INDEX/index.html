@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador Caça-Níquel Educativo</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="container">
+
+  <center><h1>Simulador de Caça-Níquel</h1>
+  <p class="subtitle">Ferramenta educativa — entenda como funciona as casas de apostas!</p></center>
+
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-label">Saldo</div>
+      <div class="stat-value" id="balance">R$ 100,00</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Perdido no total</div>
+      <div class="stat-value danger" id="total-lost">R$ 0,00</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Rodadas</div>
+      <div class="stat-value" id="rounds">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Taxa de vitória</div>
+      <div class="stat-value warning" id="win-rate">—</div>
+    </div>
+  </div>
+
+  <div class="machine">
+    <div class="reels">
+      <div class="reel" id="r0">🍋</div>
+      <div class="reel" id="r1">🍋</div>
+      <div class="reel" id="r2">🍋</div>
+    </div>
+    <div class="result-msg" id="result-msg">Pressione girar para começar</div>
+    <div class="controls">
+      <div class="bet-row">
+        <span>Aposta:</span>
+        <select id="bet-select">
+          <option value="1">R$ 1,00</option>
+          <option value="2">R$ 2,00</option>
+          <option value="5">R$ 5,00</option>
+          <option value="10">R$ 10,00</option>
+        </select>
+      </div>
+      <button class="btn-spin" id="btn-spin" onclick="doSpin()">Girar</button>
+      <button class="btn-auto" id="btn-auto" onclick="toggleAuto()">Auto (50x)</button>
+      <button class="reset-btn" onclick="resetGame()">Reiniciar</button>
+    </div>
+  </div>
+
+  <div class="chart-section">
+    <div class="section-title">Evolução do saldo</div>
+    <canvas id="balanceChart" height="140"></canvas>
+  </div>
+
+  <div class="bottom-grid">
+    <div class="pay-table">
+      <div class="section-title" style="margin-bottom:10px;">Tabela de pagamento</div>
+      <div class="pay-row">
+        <span class="pay-combo">💎💎💎</span>
+        <span class="pay-mult">×25</span>
+        <span class="pay-prob">1 em 1.000</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-combo">7️⃣7️⃣7️⃣</span>
+        <span class="pay-mult">×20</span>
+        <span class="pay-prob">1 em 216</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-combo">🍇🍇🍇</span>
+        <span class="pay-mult">×10</span>
+        <span class="pay-prob">1 em 125</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-combo">🍒🍒🍒</span>
+        <span class="pay-mult">×5</span>
+        <span class="pay-prob">1 em 64</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-combo">🍋🍋🍋</span>
+        <span class="pay-mult">×3</span>
+        <span class="pay-prob">1 em 27</span>
+      </div>
+      <div class="pay-row">
+        <span class="pay-combo">qualquer par</span>
+        <span class="pay-mult">×0,5</span>
+        <span class="pay-prob">~34%</span>
+      </div>
+    </div>
+
+    <div class="side-stats">
+      <div class="side-stat">
+        <div class="stat-label">Vantagem da casa (RTP)</div>
+        <div class="stat-value danger">15% (RTP 85%)</div>
+        <div class="stat-note">A cada R$100 apostados, a casa retém R$15 em média</div>
+      </div>
+      <div class="side-stat">
+        <div class="stat-label">Perda esperada (100 rodadas)</div>
+        <div class="stat-value danger" id="expected-loss">R$ 15,00</div>
+      </div>
+      <div class="side-stat">
+        <div class="stat-label">Perda real acumulada</div>
+        <div class="loss-info">
+          <div class="loss-row">
+            <span id="loss-label">R$ 0,00 perdido</span>
+            <span id="loss-pct">0%</span>
+          </div>
+          <div class="progress-bar-wrap">
+            <div class="progress-bar" id="loss-bar" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box" id="info-box">
+    <strong>Como funciona a vantagem da casa?</strong> Neste simulador, o RTP (Return to Player) é de 85%, ou seja,
+    a cada R$100 apostados, em média apenas R$85 voltam para o jogador. A diferença de R$15 fica com a casa — sempre.
+    Quanto mais você joga, mais essa perda se acumula.
+  </div>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
