@@ -2,7 +2,7 @@
    CONFIGURAÇÃO DOS SÍMBOLOS E PESOS
 ============================================================ */
 const SYMBOLS = ['🍋', '🍒', '🍇', '7️⃣', '💎'];
-const WEIGHTS = [50, 40, 30, 20, 10];
+const WEIGHTS = [40, 30, 20, 10, 5];
 
 // Monta o pool de cada reel (quanto mais peso, mais aparece)
 const REEL_POOL = [];
